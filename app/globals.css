@@ -1,0 +1,340 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* Premium culinary light mode — warm ivory & sage-copper palette */
+  --background: oklch(0.965 0.007 75);
+  --foreground: oklch(0.14 0.02 50);
+  --card: oklch(0.993 0.004 75);
+  --card-foreground: oklch(0.14 0.02 50);
+  --popover: oklch(0.993 0.004 75);
+  --popover-foreground: oklch(0.14 0.02 50);
+  --primary: oklch(0.38 0.08 155);
+  --primary-foreground: oklch(0.99 0 0);
+  --secondary: oklch(0.94 0.015 148);
+  --secondary-foreground: oklch(0.24 0.05 155);
+  --muted: oklch(0.93 0.007 75);
+  --muted-foreground: oklch(0.46 0.015 50);
+  --accent: oklch(0.50 0.13 50);
+  --accent-foreground: oklch(0.99 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(1 0 0);
+  --border: oklch(0.895 0.008 75);
+  --input: oklch(0.975 0.005 75);
+  --ring: oklch(0.50 0.13 50);
+  --chart-1: oklch(0.50 0.13 50);
+  --chart-2: oklch(0.55 0.10 155);
+  --chart-3: oklch(0.48 0.10 20);
+  --chart-4: oklch(0.58 0.11 85);
+  --chart-5: oklch(0.45 0.10 300);
+  --radius: 0.625rem;
+  --sidebar: oklch(0.975 0.007 75);
+  --sidebar-foreground: oklch(0.14 0.02 50);
+  --sidebar-primary: oklch(0.38 0.08 155);
+  --sidebar-primary-foreground: oklch(0.99 0 0);
+  --sidebar-accent: oklch(0.50 0.13 50);
+  --sidebar-accent-foreground: oklch(0.99 0 0);
+  --sidebar-border: oklch(0.895 0.008 75);
+  --sidebar-ring: oklch(0.50 0.13 50);
+
+  /* Accessibility settings */
+  --font-scale: 1;
+  --line-height: 1.6;
+}
+
+.dark {
+  --background: oklch(0.18 0.02 70);
+  --foreground: oklch(0.95 0.01 70);
+  --card: oklch(0.22 0.02 70);
+  --card-foreground: oklch(0.95 0.01 70);
+  --popover: oklch(0.22 0.02 70);
+  --popover-foreground: oklch(0.95 0.01 70);
+  --primary: oklch(0.75 0.15 90);
+  --primary-foreground: oklch(0.15 0.02 70);
+  --secondary: oklch(0.30 0.02 70);
+  --secondary-foreground: oklch(0.95 0.01 70);
+  --muted: oklch(0.30 0.02 70);
+  --muted-foreground: oklch(0.65 0.02 70);
+  --accent: oklch(0.65 0.15 90);
+  --accent-foreground: oklch(0.15 0.02 70);
+  --destructive: oklch(0.60 0.20 30);
+  --destructive-foreground: oklch(1 0 0);
+  --border: oklch(0.30 0.02 70);
+  --input: oklch(0.26 0.02 70);
+  --ring: oklch(0.65 0.15 90);
+  --chart-1: oklch(0.65 0.15 90);
+  --chart-2: oklch(0.75 0.12 50);
+  --chart-3: oklch(0.80 0.10 20);
+  --chart-4: oklch(0.70 0.12 75);
+  --chart-5: oklch(0.75 0.12 340);
+  --sidebar: oklch(0.20 0.02 70);
+  --sidebar-foreground: oklch(0.95 0.01 70);
+  --sidebar-primary: oklch(0.75 0.15 90);
+  --sidebar-primary-foreground: oklch(0.15 0.02 70);
+  --sidebar-accent: oklch(0.65 0.15 90);
+  --sidebar-accent-foreground: oklch(0.15 0.02 70);
+  --sidebar-border: oklch(0.30 0.02 70);
+  --sidebar-ring: oklch(0.65 0.15 90);
+}
+
+/* High contrast mode */
+html.high-contrast {
+  --foreground: oklch(0 0 0);
+  --background: oklch(1 0 0);
+  --border: oklch(0 0 0);
+  --ring: oklch(0 0 0);
+  --primary: oklch(0 0 0);
+}
+
+html.dark.high-contrast {
+  --foreground: oklch(1 0 0);
+  --background: oklch(0 0 0);
+  --border: oklch(1 0 0);
+  --ring: oklch(1 0 0);
+  --primary: oklch(1 0 0);
+}
+
+/* Reduce motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+html.reduce-motion {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@theme inline {
+  --font-sans: 'Geist', 'Geist Fallback';
+  --font-mono: 'Geist Mono', 'Geist Mono Fallback';
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    font-size: calc(16px * var(--font-scale));
+  }
+  body {
+    @apply bg-background text-foreground;
+    line-height: var(--line-height);
+    color: var(--foreground);
+  }
+  h1 {
+    @apply text-4xl font-bold leading-tight;
+    line-height: 1.2;
+  }
+  h2 {
+    @apply text-2xl font-bold leading-snug;
+    line-height: 1.3;
+  }
+  h3 {
+    @apply text-xl font-bold;
+    line-height: 1.4;
+  }
+  p {
+    line-height: var(--line-height);
+  }
+  
+  /* Dyslexia-friendly mode */
+  html.dyslexia-friendly {
+    --font-dyslexia: 'comic-sans-ms', cursive;
+    letter-spacing: 0.05em;
+  }
+  
+  html.dyslexia-friendly body {
+    font-family: var(--font-dyslexia), sans-serif;
+  }
+  
+  /* Focus visible only on keyboard interaction */
+  *:focus {
+    outline: none;
+  }
+  
+  *:focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+  
+  /* Better scrollbar for accessibility */
+  ::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 6px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--muted-foreground);
+  }
+  
+  /* Screen reader only utility */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+  
+  .focus\:not-sr-only:focus {
+    position: static;
+    width: auto;
+    height: auto;
+    padding: inherit;
+    margin: inherit;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+  }
+}
+
+/* ===========================================
+   Premium Light Mode Visual Enhancements
+   =========================================== */
+
+/* Elevated card styling — warm shadow with lift on hover */
+html:not(.dark) article.group {
+  box-shadow:
+    0 1px 3px oklch(0.14 0.02 50 / 0.05),
+    0 4px 14px oklch(0.14 0.02 50 / 0.07);
+  border-color: oklch(0.91 0.006 75);
+  transition:
+    box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+html:not(.dark) article.group:hover {
+  box-shadow:
+    0 6px 12px oklch(0.14 0.02 50 / 0.08),
+    0 16px 32px oklch(0.14 0.02 50 / 0.12);
+  transform: translateY(-3px);
+}
+
+/* Premium header — subtle warm glow */
+html:not(.dark) header {
+  box-shadow: 0 1px 10px oklch(0.14 0.02 50 / 0.06);
+  border-bottom-color: oklch(0.92 0.006 75 / 0.5);
+}
+
+/* Refined input focus ring */
+html:not(.dark) input:focus,
+html:not(.dark) input:focus-visible {
+  border-color: oklch(0.50 0.13 50 / 0.5) !important;
+  box-shadow: 0 0 0 3px oklch(0.50 0.13 50 / 0.12) !important;
+}
+
+/* Premium button hover glow */
+html:not(.dark) a[class*="bg-accent"]:hover {
+  box-shadow: 0 3px 12px oklch(0.50 0.13 50 / 0.3);
+}
+
+html:not(.dark) button[class*="bg-primary"]:hover {
+  box-shadow: 0 3px 12px oklch(0.38 0.08 155 / 0.3);
+}
+
+/* Sticky sidebar card in light mode */
+html:not(.dark) aside .sticky {
+  box-shadow:
+    0 1px 3px oklch(0.14 0.02 50 / 0.04),
+    0 4px 14px oklch(0.14 0.02 50 / 0.06);
+}
+
+/* Accessibility panel subtle shadow */
+html:not(.dark) [role="region"][aria-label="Accessibility settings"] {
+  box-shadow: inset 0 1px 0 oklch(0.92 0.006 75 / 0.6),
+    0 -2px 12px oklch(0.14 0.02 50 / 0.04);
+}
+
+/* Refined scrollbar for light mode */
+html:not(.dark) ::-webkit-scrollbar-thumb {
+  background: oklch(0.84 0.008 75);
+}
+
+html:not(.dark) ::-webkit-scrollbar-thumb:hover {
+  background: oklch(0.68 0.015 50);
+}
+
+/* Chef tips card warm highlight */
+html:not(.dark) section > div[class*="rounded-lg"][class*="bg-card"] {
+  background: linear-gradient(135deg, oklch(0.993 0.004 75), oklch(0.98 0.01 80));
+}
+
+/* Difficulty badges refined in light mode */
+html:not(.dark) .bg-green-100 {
+  background: oklch(0.94 0.04 150);
+  color: oklch(0.30 0.08 155);
+}
+
+html:not(.dark) .bg-amber-100 {
+  background: oklch(0.94 0.04 75);
+  color: oklch(0.35 0.10 65);
+}
+
+html:not(.dark) .bg-red-100 {
+  background: oklch(0.94 0.03 25);
+  color: oklch(0.38 0.12 20);
+}
