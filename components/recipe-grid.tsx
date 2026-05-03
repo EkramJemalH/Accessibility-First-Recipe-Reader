@@ -109,13 +109,16 @@ export function RecipeGrid({ recipes, title }: RecipeGridProps) {
         {/* Carousel */}
         <div className="overflow-hidden" ref={emblaRef}>
           <div className="flex -ml-6" style={{ touchAction: 'pan-y pinch-zoom' }}>
-            {recipes.map((recipe) => (
+            {recipes.map((recipe, index) => (
               <div
                 key={recipe.id}
                 className="flex-[0_0_100%] min-w-0 pl-6 sm:flex-[0_0_50%] lg:flex-[0_0_33.333%]"
               >
                 <div className="h-full py-1">
-                  <RecipeCard recipe={recipe} />
+                  {/* The first two slides are visible above the fold on initial load.
+                      Pass priority so Next.js sets loading="eager" and adds a preload
+                      link, eliminating the LCP warning for those images. */}
+                  <RecipeCard recipe={recipe} priority={index < 2} />
                 </div>
               </div>
             ))}

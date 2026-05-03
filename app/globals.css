@@ -198,14 +198,75 @@ html.reduce-motion {
     font-family: var(--font-dyslexia), sans-serif;
   }
   
-  /* Focus visible only on keyboard interaction */
+  /* ── Focus ring — keyboard navigation (Requirements 1.10, 13.1, 13.2) ── */
+
+  /* Remove default browser outline; we provide our own via :focus-visible */
   *:focus {
     outline: none;
   }
-  
+
+  /*
+   * Visible focus ring for all interactive elements when navigated via keyboard.
+   * Uses a 2px solid ring with a 2px offset so it sits outside the element border.
+   * The ring color is driven by --ring so it adapts to light/dark/high-contrast.
+   */
   *:focus-visible {
     outline: 2px solid var(--ring);
     outline-offset: 2px;
+    border-radius: var(--radius-sm, 2px);
+  }
+
+  /*
+   * Buttons and links that use box-shadow-based focus rings (e.g. shadcn/ui
+   * components that apply focus-visible:ring-* utilities) get an extra
+   * box-shadow fallback so the ring is always visible even when outline is
+   * suppressed by a parent's overflow:hidden.
+   */
+  button:focus-visible,
+  a:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible,
+  [role="button"]:focus-visible,
+  [role="link"]:focus-visible,
+  [role="checkbox"]:focus-visible,
+  [role="radio"]:focus-visible,
+  [role="switch"]:focus-visible,
+  [role="tab"]:focus-visible,
+  [role="menuitem"]:focus-visible,
+  [role="option"]:focus-visible,
+  [tabindex]:focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+
+  /*
+   * High-contrast mode: thicker, fully opaque focus ring so it is clearly
+   * visible against both white and black backgrounds.
+   */
+  html.high-contrast *:focus-visible,
+  html.high-contrast button:focus-visible,
+  html.high-contrast a:focus-visible,
+  html.high-contrast input:focus-visible,
+  html.high-contrast select:focus-visible,
+  html.high-contrast textarea:focus-visible,
+  html.high-contrast [role="button"]:focus-visible,
+  html.high-contrast [role="switch"]:focus-visible,
+  html.high-contrast [tabindex]:focus-visible {
+    outline: 3px solid var(--ring);
+    outline-offset: 3px;
+    box-shadow: 0 0 0 1px var(--background);
+  }
+
+  /*
+   * Windows High Contrast / forced-colors mode: let the browser choose the
+   * system highlight color so the ring is always visible.
+   */
+  @media (forced-colors: active) {
+    *:focus-visible {
+      outline: 3px solid ButtonText;
+      outline-offset: 2px;
+    }
   }
   
   /* Better scrollbar for accessibility */
