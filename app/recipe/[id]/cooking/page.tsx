@@ -15,8 +15,8 @@ import {
   RotateCw,
   CheckCircle2,
 } from 'lucide-react'
-import { useRecipeContext } from '@/context/RecipeContext'
-import { useAccessibilityContext } from '@/context/AccessibilityContext'
+import { useRecipeContext } from '../../../../context/RecipeContext'
+import { useAccessibilityContext } from '../../../../context/AccessibilityContext'
 import { useCookingStep } from '@/hooks/useCookingStep'
 import { useVoice } from '@/hooks/useVoice'
 
