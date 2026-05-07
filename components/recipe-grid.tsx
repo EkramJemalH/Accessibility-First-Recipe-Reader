@@ -1,8 +1,3 @@
-'use client'
-
-import { useCallback, useEffect, useState } from 'react'
-import useEmblaCarousel from 'embla-carousel-react'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { Recipe } from '@/lib/recipes'
 import { RecipeCard } from '@/components/recipe-card'
 
@@ -12,64 +7,13 @@ interface RecipeGridProps {
 }
 
 export function RecipeGrid({ recipes, title }: RecipeGridProps) {
-  const [emblaRef, emblaApi] = useEmblaCarousel({
-    align: 'start',
-    slidesToScroll: 1,
-    containScroll: 'trimSnaps',
-    loop: true,
-  })
-
-  const [selectedSnap, setSelectedSnap] = useState(0)
-  const [snapCount, setSnapCount] = useState(0)
-  const [isPaused, setIsPaused] = useState(false)
-
-  const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi])
-  const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi])
-  const scrollTo = useCallback((index: number) => emblaApi?.scrollTo(index), [emblaApi])
-
-  const onSelect = useCallback(() => {
-    if (!emblaApi) return
-    setSelectedSnap(emblaApi.selectedScrollSnap())
-    setSnapCount(emblaApi.scrollSnapList().length)
-  }, [emblaApi])
-
-  // Autoplay Logic
-  useEffect(() => {
-    if (!emblaApi || isPaused) return
-
-    const intervalId = setInterval(() => {
-      emblaApi.scrollNext()
-    }, 4000) // 4 seconds
-
-    return () => clearInterval(intervalId)
-  }, [emblaApi, isPaused])
-
-  useEffect(() => {
-    if (!emblaApi) return
-    onSelect()
-    emblaApi.on('select', onSelect)
-    emblaApi.on('reInit', onSelect)
-    return () => {
-      emblaApi.off('select', onSelect)
-      emblaApi.off('reInit', onSelect)
-    }
-  }, [emblaApi, onSelect])
-
-  // Re-initialize when recipes change
-  useEffect(() => {
-    if (emblaApi) {
-      emblaApi.reInit()
-    }
-  }, [emblaApi, recipes])
-
   if (recipes.length === 0) {
     return (
-      <section className="py-8">
+      <section className="py-12">
         <div className="container mx-auto px-4">
-          {title && <h2 className="text-2xl font-bold mb-4 text-foreground">{title}</h2>}
+          {title && <h2 className="text-2xl font-bold mb-8 text-foreground">{title}</h2>}
           <div className="text-center py-12">
-            <div className="text-4xl mb-3">🍽️</div>
-            <p className="text-muted-foreground text-lg">No recipes found. Try adjusting your filters.</p>
+            <p className="text-muted-foreground text-lg">No recipes found. Try adjusting your search.</p>
           </div>
         </div>
       </section>
@@ -77,33 +21,13 @@ export function RecipeGrid({ recipes, title }: RecipeGridProps) {
   }
 
   return (
-    <section 
-      className="py-6 sm:py-8 overflow-hidden"
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
-    >
+    <section className="py-12">
       <div className="container mx-auto px-4">
-        {/* Header with title and navigation arrows */}
-        <div className="flex items-center justify-between mb-6">
-          {title && <h2 className="text-xl md:text-2xl font-bold text-foreground">{title}</h2>}
-          {recipes.length > 3 && (
-            <div className="flex items-center gap-2">
-              <button
-                onClick={scrollPrev}
-                aria-label="Previous recipes"
-                className="inline-flex items-center justify-center w-9 h-9 rounded-full border border-border bg-card text-foreground shadow-sm hover:bg-secondary hover:shadow-md transition-all duration-200 cursor-pointer active:scale-95"
-              >
-                <ChevronLeft className="w-4 h-4" />
-              </button>
-              <button
-                onClick={scrollNext}
-                aria-label="Next recipes"
-                className="inline-flex items-center justify-center w-9 h-9 rounded-full border border-border bg-card text-foreground shadow-sm hover:bg-secondary hover:shadow-md transition-all duration-200 cursor-pointer active:scale-95"
-              >
-                <ChevronRight className="w-4 h-4" />
-              </button>
-            </div>
-          )}
+        {title && <h2 className="text-2xl font-bold mb-8 text-foreground">{title}</h2>}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-max">
+          {recipes.map((recipe) => (
+            <RecipeCard key={recipe.id} recipe={recipe} />
+          ))}
         </div>
 
         {/* Carousel */}
