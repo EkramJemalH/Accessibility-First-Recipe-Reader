@@ -53,7 +53,7 @@ function CompletionScreen({ recipeId, recipeTitle }: { recipeId: string; recipeT
       />
       <div className="space-y-3">
         <h1 className="text-3xl font-bold text-foreground">
-           Congratulations!
+          🎉 Congratulations!
         </h1>
         <p className="text-lg text-muted-foreground">
           You&apos;ve completed <span className="font-semibold text-foreground">{recipeTitle}</span>!
@@ -73,7 +73,7 @@ function CompletionScreen({ recipeId, recipeTitle }: { recipeId: string; recipeT
   )
 }
 
-// ─── Cooking Mode Page
+// ─── Cooking Mode Page ────────────────────────────────────────────────────────
 
 /**
  * Cooking Mode page — step-by-step guided cooking with voice narration,
@@ -98,7 +98,7 @@ export default function CookingModePage() {
   // Completion state — becomes true when user presses Next on the last step
   const [completed, setCompleted] = useState(false)
 
-  // ── Timer state ───
+  // ── Timer state ──────────────────────────────────────────────────────────
   const [timerMinutes, setTimerMinutes] = useState(5)
   const [timeLeft, setTimeLeft] = useState(0) // seconds
   const [timerRunning, setTimerRunning] = useState(false)
@@ -126,7 +126,7 @@ export default function CookingModePage() {
     }
   }, [currentStep, currentInstruction, voiceEnabled, isSupported, completed, speak, stop])
 
-  // ── Navigation handlers ───────────
+  // ── Navigation handlers ──────────────────────────────────────────────────
   const handleNext = useCallback(() => {
     if (isLast) {
       setCompleted(true)
