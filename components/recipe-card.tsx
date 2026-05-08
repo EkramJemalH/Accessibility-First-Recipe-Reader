@@ -1,5 +1,2 @@
-/**
- * Re-export alias for backward compatibility.
- * The canonical component lives in `components/RecipeCard.tsx`.
- */
+/* Re-export for backward compatibility */
 export { RecipeCard } from './RecipeCard'
