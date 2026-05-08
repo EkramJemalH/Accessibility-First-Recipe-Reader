@@ -45,7 +45,7 @@ export function BottomNav() {
                   .filter(Boolean)
                   .join(' ')}
               >
-                {/* Active indicator bar — non-color visual cue (Req 13.6) */}
+                {/* Active indicator – non‑color visual cue (WCAG 1.4.1) */}
                 {isActive && (
                   <span
                     aria-hidden="true"
@@ -53,7 +53,11 @@ export function BottomNav() {
                   />
                 )}
                 <Icon className="h-5 w-5" aria-hidden={true} />
-                <span className={isActive ? 'font-semibold' : ''}>{label}</span>
+                {/* 
+                  Use font-medium instead of font-semibold to avoid layout shift.
+                  The colour change is already a strong active indicator.
+                */}
+                <span className={isActive ? 'font-medium' : ''}>{label}</span>
               </Link>
             </li>
           )
