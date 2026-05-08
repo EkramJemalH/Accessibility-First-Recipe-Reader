@@ -1,6 +1,11 @@
 import { Suspense } from "react";
 import { HomePageClient } from "./_components/HomePageClient";
 
+/**
+ * Home page — Server Component shell.
+ * Wraps the client component in Suspense so useSearchParams() works correctly
+ * in the Next.js App Router (required when reading search params in a Client Component).
+ */
 export default function HomePage() {
   return (
     <Suspense fallback={<HomePageSkeleton />}>

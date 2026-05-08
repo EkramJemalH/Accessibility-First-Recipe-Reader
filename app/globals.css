@@ -197,7 +197,7 @@ html.reduce-motion {
   html.dyslexia-friendly body {
     font-family: var(--font-dyslexia), sans-serif;
   }
-
+  
   /* ── Focus ring — keyboard navigation (Requirements 1.10, 13.1, 13.2) ── */
 
   /* Remove default browser outline; we provide our own via :focus-visible */

@@ -14,3 +14,12 @@ next.user-config.*
 node_modules
 .next/
 .DS_Store
+
+# Kiro IDE internal files — not part of the project
+.kiro/
+
+# TypeScript build cache
+tsconfig.tsbuildinfo
+
+# Legacy/deleted source
+src/legacy-components/

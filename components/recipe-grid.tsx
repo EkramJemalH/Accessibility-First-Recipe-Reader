@@ -29,6 +29,47 @@ export function RecipeGrid({ recipes, title }: RecipeGridProps) {
             <RecipeCard key={recipe.id} recipe={recipe} />
           ))}
         </div>
+
+        {/* Carousel */}
+        <div className="overflow-hidden" ref={emblaRef}>
+          <div className="flex -ml-6" style={{ touchAction: 'pan-y pinch-zoom' }}>
+            {recipes.map((recipe, index) => (
+              <div
+                key={recipe.id}
+                className="flex-[0_0_100%] min-w-0 pl-6 sm:flex-[0_0_50%] lg:flex-[0_0_33.333%]"
+              >
+                <div className="h-full py-1">
+                  {/* The first two slides are visible above the fold on initial load.
+                      Pass priority so Next.js sets loading="eager" and adds a preload
+                      link, eliminating the LCP warning for those images. */}
+                  <RecipeCard recipe={recipe} priority={index < 2} />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Dot indicators - Compact and closer to the cards */}
+        {snapCount > 1 && (
+          <div className="flex justify-center items-center gap-1.5 mt-6" role="tablist" aria-label="Carousel pagination">
+            {Array.from({ length: snapCount }).map((_, i) => (
+              <button
+                key={i}
+                role="tab"
+                aria-selected={i === selectedSnap}
+                aria-label={`Go to slide ${i + 1}`}
+                onClick={() => scrollTo(i)}
+                className={`
+                  rounded-full transition-all duration-300 ease-out cursor-pointer
+                  ${i === selectedSnap
+                    ? 'w-6 h-2 bg-accent shadow-sm'
+                    : 'w-2 h-2 bg-border hover:bg-muted-foreground/40'
+                  }
+                `}
+              />
+            ))}
+          </div>
+        )}
       </div>
     </section>
   )
